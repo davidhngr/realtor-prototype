@@ -1,0 +1,112 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+    color: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0px;
+    margin: 0px;
+}
+
+p {
+    color: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 0px;
+    margin: 0px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    color: inherit;
+    font-size: 28px;
+    font-weight: 600;
+    padding: 0px;
+    margin: 0px;
+}
+
+h2 {
+    color: inherit;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 0px;
+    margin: 0px;
+}
+
+h3 {
+    color: inherit;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0px;
+    margin: 0px;
+}
+
+h4 {
+    color: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0px;
+    margin: 0px;
+}
+
+.MuiOutlinedInput-root {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 40px;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border: 1px solid black;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: 1px solid black;
+    box-shadow: rgb(255 255 255) 0px 0px 0px 1px, rgb(255 153 51) 0px 0px 2px 3px, rgb(236, 141, 47) 0px 0px 2px 4px;
+}
+
+.MuiToggleButton-root {
+    padding-left: 20px;
+    padding-right: 20px;
+    color: rgb(255, 153, 51);
+    background-color: white;
+    border: 1px solid rgb(255, 153, 51);
+    outline: 1px solid rgb(255, 153, 51);
+}
+
+.MuiToggleButton-root:hover {
+    color: white;
+    background-color: rgb(197, 119, 40);
+    border: 1px solid rgb(197, 119, 40);
+    outline: 1px solid rgb(197, 119, 40);
+}
+
+.MuiToggleButton-root:active {
+    color: white;
+    background-color: rgb(255, 153, 51);
+    border: 1px solid rgb(255, 153, 51);
+    outline: 1px solid rgb(255, 153, 51);
+}
+
+.MuiToggleButton-root.Mui-selected {
+    color: white;
+    background-color: rgb(255, 153, 51);
+    border: 1px solid rgb(255, 153, 51);
+    outline: 1px solid rgb(255, 153, 51);
+}
+
+.MuiToggleButton-root.Mui-selected:active,
+.MuiToggleButton-root.Mui-selected:focus-within,
+.MuiToggleButton-root.Mui-selected:hover {
+    color: white;
+    background-color: rgb(255, 153, 51);
+    border: 1px solid rgb(255, 153, 51);
+    outline: 1px solid rgb(255, 153, 51);
+}

@@ -1,0 +1,144 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-realtorprototype2-dev-145240-authRole",
+      "UnauthRoleArn": "arn:aws:iam::290590551403:role/amplify-realtorprototype2-dev-145240-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::290590551403:role/amplify-realtorprototype2-dev-145240-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-realtorprototype2-dev-145240-deployment",
+      "UnauthRoleName": "amplify-realtorprototype2-dev-145240-unauthRole",
+      "StackName": "amplify-realtorprototype2-dev-145240",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:290590551403:stack/amplify-realtorprototype2-dev-145240/b4abd420-3631-11ec-81d6-0a75b901d0d4",
+      "AmplifyAppId": "d1zufuvulxqzxj"
+    }
+  },
+  "auth": {
+    "realtorprototype27a1acfb0": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "loginMechanisms": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": "8",
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE"
+          ]
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-realtorprototype2-dev-145240-deployment/amplify-cfn-templates/auth/realtorprototype27a1acfb0-cloudformation-template.json",
+        "logicalId": "authrealtorprototype27a1acfb0"
+      },
+      "lastPushTimeStamp": "2022-03-16T13:00:28.997Z",
+      "output": {
+        "UserPoolId": "ap-southeast-1_ylo6xDJQX",
+        "AppClientIDWeb": "4fl99sv126gqioeas2pq0i61k1",
+        "AppClientID": "33q4pb26omdkseip407ap1ba5p",
+        "IdentityPoolId": "ap-southeast-1:ff7c7119-319d-45f0-869c-3bdeac06b1a5",
+        "UserPoolArn": "arn:aws:cognito-idp:ap-southeast-1:290590551403:userpool/ap-southeast-1_ylo6xDJQX",
+        "IdentityPoolName": "realtorprototype27a1acfb0_identitypool_7a1acfb0__dev",
+        "UserPoolName": "realtorprototype27a1acfb0_userpool_7a1acfb0",
+        "CreatedSNSRole": "arn:aws:iam::290590551403:role/sns7a1acfb0145240-dev"
+      },
+      "lastPushDirHash": "pqSi8bIylwQWAx6+CSxVmBIlgyE="
+    }
+  },
+  "api": {
+    "realtorprototype2": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authrealtorprototype27a1acfb0"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 365,
+                "description": "Public API"
+              }
+            },
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
+        },
+        "GraphQLAPIIdOutput": "r2efkiwb7jc3pgwsjzxmvohkfu",
+        "GraphQLAPIEndpointOutput": "https://kkpswq6mujc6xpy37eyecgjik4.appsync-api.ap-southeast-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-qisk5r2x6fbz5ez3k3c2ioxsva"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-realtorprototype2-dev-145240-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apirealtorprototype2"
+      },
+      "lastPushTimeStamp": "2022-03-16T13:00:28.968Z",
+      "lastPushDirHash": "mye1G7BbNvRIeSJhmCu6WndAWDE="
+    },
+    "realtorprototype2-dev": {
+      "service": "AppSync",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS"
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY"
+            }
+          ],
+          "userPoolConfig": {
+            "userPoolId": "ap-southeast-1_ylo6xDJQX",
+            "awsRegion": "ap-southeast-1",
+            "defaultAction": "ALLOW",
+            "appIdClientRegex": null
+          }
+        },
+        "GraphQLAPIIdOutput": "r2efkiwb7jc3pgwsjzxmvohkfu",
+        "GraphQLAPIEndpointOutput": "https://kkpswq6mujc6xpy37eyecgjik4.appsync-api.ap-southeast-1.amazonaws.com/graphql",
+        "name": "realtorprototype2-dev",
+        "region": "ap-southeast-1",
+        "GraphQLAPIKeyOutput": "da2-qisk5r2x6fbz5ez3k3c2ioxsva"
+      },
+      "lastPushTimeStamp": "2022-03-15T12:51:42.140Z"
+    }
+  },
+  "storage": {
+    "s3b41d6a31": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-realtorprototype2-dev-145240-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+        "logicalId": "storages3b41d6a31"
+      },
+      "lastPushTimeStamp": "2022-03-16T13:00:28.970Z",
+      "output": {
+        "BucketName": "appphoto145240-dev",
+        "Region": "ap-southeast-1"
+      },
+      "lastPushDirHash": "huu1gqgKB2Rzlg9fK4IXMsA5y5Y="
+    }
+  }
+}

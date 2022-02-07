@@ -1,0 +1,625 @@
+type House @aws_iam @aws_cognito_user_pools {
+  id: ID!
+  address: String!
+  description: String
+  area: Int
+  beds: Int
+  baths: Int
+  city: String!
+  latitude: Float!
+  longitude: Float!
+  price: Int!
+  state: String!
+  photo: [String!]
+  keyDetails: AWSJSON
+  ownerID: ID!
+  owner: User
+  favoritedBy(userID: ModelIDKeyConditionInput, filter: ModelFavoriteFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelFavoriteConnection
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: AWSEmail!
+  photo: String
+  favorite(houseID: ModelIDKeyConditionInput, filter: ModelFavoriteFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelFavoriteConnection
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+type Favorite {
+  id: ID!
+  houseID: ID!
+  userID: ID!
+  user: User!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  house: House! @aws_iam @aws_cognito_user_pools
+}
+
+type Conversation {
+  id: ID!
+  senderID: ID!
+  sender: User!
+  receiverID: ID!
+  receiver: User!
+  lastMessageID: ID!
+  lastMessage: Message!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+type Message {
+  id: ID!
+  conversationID: ID!
+  senderID: ID!
+  message: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelHouseConnection @aws_iam @aws_cognito_user_pools {
+  items: [House]!
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelHouseFilterInput {
+  id: ModelIDInput
+  address: ModelStringInput
+  description: ModelStringInput
+  area: ModelIntInput
+  beds: ModelIntInput
+  baths: ModelIntInput
+  city: ModelStringInput
+  latitude: ModelFloatInput
+  longitude: ModelFloatInput
+  price: ModelIntInput
+  state: ModelStringInput
+  photo: ModelStringInput
+  keyDetails: ModelStringInput
+  ownerID: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelHouseFilterInput]
+  or: [ModelHouseFilterInput]
+  not: ModelHouseFilterInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Query {
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+  getFavorite(id: ID!): Favorite
+  listFavorites(filter: ModelFavoriteFilterInput, limit: Int, nextToken: String): ModelFavoriteConnection
+  getConversation(id: ID!): Conversation
+  listConversations(filter: ModelConversationFilterInput, limit: Int, nextToken: String): ModelConversationConnection
+  getMessage(id: ID!): Message
+  listMessages(filter: ModelMessageFilterInput, limit: Int, nextToken: String): ModelMessageConnection
+  messagesByDate(conversationID: ID, createdAt: ModelStringKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelMessageFilterInput, limit: Int, nextToken: String): ModelMessageConnection
+  getHouse(id: ID!): House @aws_iam @aws_cognito_user_pools
+  listHouses(filter: ModelHouseFilterInput, limit: Int, nextToken: String): ModelHouseConnection @aws_iam @aws_cognito_user_pools
+  searchHouses(filter: SearchableHouseFilterInput, sort: SearchableHouseSortInput, limit: Int, nextToken: String, from: Int): SearchableHouseConnection @aws_iam @aws_cognito_user_pools
+}
+
+input CreateHouseInput {
+  id: ID
+  address: String!
+  description: String
+  area: Int
+  beds: Int
+  baths: Int
+  city: String!
+  latitude: Float!
+  longitude: Float!
+  price: Int!
+  state: String!
+  photo: [String!]
+  keyDetails: AWSJSON
+  ownerID: ID!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input UpdateHouseInput {
+  id: ID!
+  address: String
+  description: String
+  area: Int
+  beds: Int
+  baths: Int
+  city: String
+  latitude: Float
+  longitude: Float
+  price: Int
+  state: String
+  photo: [String!]
+  keyDetails: AWSJSON
+  ownerID: ID
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input DeleteHouseInput {
+  id: ID!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
+  createFavorite(input: CreateFavoriteInput!, condition: ModelFavoriteConditionInput): Favorite
+  updateFavorite(input: UpdateFavoriteInput!, condition: ModelFavoriteConditionInput): Favorite
+  deleteFavorite(input: DeleteFavoriteInput!, condition: ModelFavoriteConditionInput): Favorite
+  createConversation(input: CreateConversationInput!, condition: ModelConversationConditionInput): Conversation
+  updateConversation(input: UpdateConversationInput!, condition: ModelConversationConditionInput): Conversation
+  deleteConversation(input: DeleteConversationInput!, condition: ModelConversationConditionInput): Conversation
+  createMessage(input: CreateMessageInput!, condition: ModelMessageConditionInput): Message
+  updateMessage(input: UpdateMessageInput!, condition: ModelMessageConditionInput): Message
+  deleteMessage(input: DeleteMessageInput!, condition: ModelMessageConditionInput): Message
+  createHouse(input: CreateHouseInput!, condition: ModelHouseConditionInput): House @aws_iam @aws_cognito_user_pools
+  updateHouse(input: UpdateHouseInput!, condition: ModelHouseConditionInput): House @aws_iam @aws_cognito_user_pools
+  deleteHouse(input: DeleteHouseInput!, condition: ModelHouseConditionInput): House @aws_iam @aws_cognito_user_pools
+}
+
+input ModelHouseConditionInput {
+  address: ModelStringInput
+  description: ModelStringInput
+  area: ModelIntInput
+  beds: ModelIntInput
+  baths: ModelIntInput
+  city: ModelStringInput
+  latitude: ModelFloatInput
+  longitude: ModelFloatInput
+  price: ModelIntInput
+  state: ModelStringInput
+  photo: ModelStringInput
+  keyDetails: ModelStringInput
+  ownerID: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelHouseConditionInput]
+  or: [ModelHouseConditionInput]
+  not: ModelHouseConditionInput
+}
+
+type Subscription {
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+  onCreateFavorite: Favorite @aws_subscribe(mutations: ["createFavorite"])
+  onUpdateFavorite: Favorite @aws_subscribe(mutations: ["updateFavorite"])
+  onDeleteFavorite: Favorite @aws_subscribe(mutations: ["deleteFavorite"])
+  onCreateConversation: Conversation @aws_subscribe(mutations: ["createConversation"])
+  onUpdateConversation: Conversation @aws_subscribe(mutations: ["updateConversation"])
+  onDeleteConversation: Conversation @aws_subscribe(mutations: ["deleteConversation"])
+  onCreateMessage: Message @aws_subscribe(mutations: ["createMessage"])
+  onUpdateMessage: Message @aws_subscribe(mutations: ["updateMessage"])
+  onDeleteMessage: Message @aws_subscribe(mutations: ["deleteMessage"])
+  onCreateHouse(owner: String): House @aws_subscribe(mutations: ["createHouse"]) @aws_iam @aws_cognito_user_pools
+  onUpdateHouse(owner: String): House @aws_subscribe(mutations: ["updateHouse"]) @aws_iam @aws_cognito_user_pools
+  onDeleteHouse(owner: String): House @aws_subscribe(mutations: ["deleteHouse"]) @aws_iam @aws_cognito_user_pools
+}
+
+type ModelUserConnection {
+  items: [User]!
+  nextToken: String
+}
+
+input ModelUserFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  email: ModelStringInput
+  photo: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+input CreateUserInput {
+  id: ID
+  name: String!
+  email: AWSEmail!
+  photo: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input UpdateUserInput {
+  id: ID!
+  name: String
+  email: AWSEmail
+  photo: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input DeleteUserInput {
+  id: ID!
+}
+
+input ModelUserConditionInput {
+  name: ModelStringInput
+  email: ModelStringInput
+  photo: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelUserConditionInput]
+  or: [ModelUserConditionInput]
+  not: ModelUserConditionInput
+}
+
+type ModelFavoriteConnection {
+  items: [Favorite]!
+  nextToken: String
+}
+
+input ModelFavoriteFilterInput {
+  id: ModelIDInput
+  houseID: ModelIDInput
+  userID: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelFavoriteFilterInput]
+  or: [ModelFavoriteFilterInput]
+  not: ModelFavoriteFilterInput
+}
+
+input CreateFavoriteInput {
+  id: ID
+  houseID: ID!
+  userID: ID!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input UpdateFavoriteInput {
+  id: ID!
+  houseID: ID
+  userID: ID
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input DeleteFavoriteInput {
+  id: ID!
+}
+
+input ModelFavoriteConditionInput {
+  houseID: ModelIDInput
+  userID: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelFavoriteConditionInput]
+  or: [ModelFavoriteConditionInput]
+  not: ModelFavoriteConditionInput
+}
+
+type ModelConversationConnection {
+  items: [Conversation]!
+  nextToken: String
+}
+
+input ModelConversationFilterInput {
+  id: ModelIDInput
+  senderID: ModelIDInput
+  receiverID: ModelIDInput
+  lastMessageID: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelConversationFilterInput]
+  or: [ModelConversationFilterInput]
+  not: ModelConversationFilterInput
+}
+
+input CreateConversationInput {
+  id: ID
+  senderID: ID!
+  receiverID: ID!
+  lastMessageID: ID!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input UpdateConversationInput {
+  id: ID!
+  senderID: ID
+  receiverID: ID
+  lastMessageID: ID
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input DeleteConversationInput {
+  id: ID!
+}
+
+input ModelConversationConditionInput {
+  senderID: ModelIDInput
+  receiverID: ModelIDInput
+  lastMessageID: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelConversationConditionInput]
+  or: [ModelConversationConditionInput]
+  not: ModelConversationConditionInput
+}
+
+type ModelMessageConnection {
+  items: [Message]!
+  nextToken: String
+}
+
+input ModelMessageFilterInput {
+  id: ModelIDInput
+  conversationID: ModelIDInput
+  senderID: ModelIDInput
+  message: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelMessageFilterInput]
+  or: [ModelMessageFilterInput]
+  not: ModelMessageFilterInput
+}
+
+input CreateMessageInput {
+  id: ID
+  conversationID: ID!
+  senderID: ID!
+  message: String!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input UpdateMessageInput {
+  id: ID!
+  conversationID: ID
+  senderID: ID
+  message: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input DeleteMessageInput {
+  id: ID!
+}
+
+input ModelMessageConditionInput {
+  conversationID: ModelIDInput
+  senderID: ModelIDInput
+  message: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelMessageConditionInput]
+  or: [ModelMessageConditionInput]
+  not: ModelMessageConditionInput
+}
+
+input ModelIDKeyConditionInput {
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelStringKeyConditionInput {
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  between: [String]
+  beginsWith: String
+}
+
+input SearchableStringFilterInput {
+  ne: String
+  gt: String
+  lt: String
+  gte: String
+  lte: String
+  eq: String
+  match: String
+  matchPhrase: String
+  matchPhrasePrefix: String
+  multiMatch: String
+  exists: Boolean
+  wildcard: String
+  regexp: String
+  range: [String]
+}
+
+input SearchableIntFilterInput {
+  ne: Int
+  gt: Int
+  lt: Int
+  gte: Int
+  lte: Int
+  eq: Int
+  range: [Int]
+}
+
+input SearchableFloatFilterInput {
+  ne: Float
+  gt: Float
+  lt: Float
+  gte: Float
+  lte: Float
+  eq: Float
+  range: [Float]
+}
+
+input SearchableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input SearchableIDFilterInput {
+  ne: ID
+  gt: ID
+  lt: ID
+  gte: ID
+  lte: ID
+  eq: ID
+  match: ID
+  matchPhrase: ID
+  matchPhrasePrefix: ID
+  multiMatch: ID
+  exists: Boolean
+  wildcard: ID
+  regexp: ID
+  range: [ID]
+}
+
+input SearchableHouseFilterInput {
+  id: SearchableIDFilterInput
+  address: SearchableStringFilterInput
+  description: SearchableStringFilterInput
+  area: SearchableIntFilterInput
+  beds: SearchableIntFilterInput
+  baths: SearchableIntFilterInput
+  city: SearchableStringFilterInput
+  latitude: SearchableFloatFilterInput
+  longitude: SearchableFloatFilterInput
+  price: SearchableIntFilterInput
+  state: SearchableStringFilterInput
+  photo: SearchableStringFilterInput
+  keyDetails: SearchableStringFilterInput
+  ownerID: SearchableIDFilterInput
+  createdAt: SearchableStringFilterInput
+  updatedAt: SearchableStringFilterInput
+  and: [SearchableHouseFilterInput]
+  or: [SearchableHouseFilterInput]
+  not: SearchableHouseFilterInput
+}
+
+enum SearchableSortDirection {
+  asc
+  desc
+}
+
+enum SearchableHouseSortableFields {
+  id
+  address
+  description
+  area
+  beds
+  baths
+  city
+  latitude
+  longitude
+  price
+  state
+  photo
+  keyDetails
+  ownerID
+  createdAt
+  updatedAt
+}
+
+input SearchableHouseSortInput {
+  field: SearchableHouseSortableFields
+  direction: SearchableSortDirection
+}
+
+type SearchableHouseConnection @aws_iam @aws_cognito_user_pools {
+  items: [House]!
+  nextToken: String
+  total: Int
+}

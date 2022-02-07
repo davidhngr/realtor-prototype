@@ -1,0 +1,20 @@
+{
+    "CreateAPIKey": 1,
+    "AppSyncApiName": "realtorprototype2",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authrealtorprototype27a1acfb0",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "S3DeploymentBucket": "amplify-realtorprototype2-dev-145240-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/84b4cdf2f9c015a507955b877b879de9267a3696"
+}

@@ -1,0 +1,70 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.filterContainer {
+    display: flex;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 35px;
+}
+
+.houseContainer {
+    max-height: calc(100vh - 167px);
+    overflow: auto;
+}
+
+.sortContainer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.gridContainer {
+    justify-content: center;
+    padding-top: 20px;
+    margin-left: 5px;
+}
+
+.grid {
+    min-width: 25vh;
+    width: 50%;
+}
+
+.mapContainer {
+    height: 100%;
+    width: 100%;
+}
+
+.mapContainerElement {
+    height: calc(100vh - 185px);
+    width: 100%;
+    padding-right: 15px;
+}
+
+.mapElement {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.cardContainer {
+    box-shadow: rgba(100, 100, 111, 0.25) 0px 7px 29px 0px;
+    border-radius: 8px;
+}
+
+.cardContainer:hover {
+    box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .grid {
+        width: 100%;
+        flex-direction: column;
+    }
+}
