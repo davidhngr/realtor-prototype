@@ -1,0 +1,50 @@
+.contactTabContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 95%;
+    height: 50vh;
+    padding: 20px;
+    background-color: rgb(245, 246, 247);
+}
+
+.contactTab {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar {
+    align-self: center;
+    height: 250px;
+    width: 250px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #bfbfbf;
+    border-radius: 125px;
+    object-fit: cover;
+}
+
+.button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: white;
+    border: 1px solid rgb(255, 153, 51);
+    background-color: rgb(255, 153, 51);
+    box-shadow: none;
+}
+
+.button:hover {
+    color: rgb(236, 141, 47);
+    border: 1px solid rgb(236, 141, 47);
+    background-color: white;
+    box-shadow: none;
+}
+
+.button:active {
+    color: white;
+    border: 1px solid rgb(255, 153, 51);
+    background-color: rgb(255, 153, 51);
+}

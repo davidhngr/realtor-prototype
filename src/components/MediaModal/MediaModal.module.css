@@ -1,0 +1,49 @@
+.modalContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 85%;
+    width: 92.5%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    outline: none;
+    border-radius: 8px;
+}
+
+.tabContainer {
+    display: flex;
+    padding: 5px;
+    border-bottom: 1px solid rgb(255, 153, 51);
+}
+
+.galleryGrid {
+    overflow: auto;
+    max-height: 65vh;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+@media screen and (min-width: 1368px) {
+    .galleryGrid {
+        overflow: auto;
+        max-height: 72.5vh;
+        padding-top: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.mapContainer {
+    height: 100%;
+}
+
+.mapTab {
+    height: 74vh
+}
+
+@media screen and (min-width: 1368px) {
+    .mapTab {
+        height: 79vh
+    }
+}
