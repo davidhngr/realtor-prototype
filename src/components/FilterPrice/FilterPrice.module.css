@@ -1,0 +1,10 @@
+.popoverButtonOpen {
+    color: white;
+    border: 1px solid rgb(197, 119, 40);
+    background-color: rgb(197, 119, 40);
+}
+
+.popover {
+    margin-top: 50px;
+    left: 2.5px;
+}
