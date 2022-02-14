@@ -176,7 +176,7 @@ export default function Filter() {
   }, [beds, baths, minPrice, maxPrice]);
 
   const handleMinChange = (e) => {
-    if (e.target.value > maxPrice && e.target.value != 0) {
+    if (e.target.value > maxPrice && maxPrice != 0) {
       setMaxPrice(e.target.value);
     } else if (e.target.value === 0) {
       setMinPrice(e.target.value);
