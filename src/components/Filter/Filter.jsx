@@ -24,152 +24,77 @@ export default function Filter() {
     const queryMinPrice = `minPrice=${minPrice}`;
     const queryMaxPrice = `maxPrice=${maxPrice}`;
 
-    if (
-      beds !== null &&
-      baths === null &&
-      minPrice === 0 &&
-      maxPrice === 0
-    ) {
+    if (beds !== null && baths === null && minPrice === 0 && maxPrice === 0) {
       url = `/search?${queryBeds}`;
       router.push(url, url);
     }
 
-    if (
-      baths !== null &&
-      beds === null &&
-      minPrice === 0 &&
-      maxPrice === 0
-    ) {
+    if (baths !== null && beds === null && minPrice === 0 && maxPrice === 0) {
       url = `/search?${queryBaths}`;
       router.push(url, url);
     }
 
-    if (
-      beds === null &&
-      baths === null &&
-      minPrice !== 0 &&
-      maxPrice === 0
-    ) {
+    if (beds === null && baths === null && minPrice !== 0 && maxPrice === 0) {
       url = `/search?${queryMinPrice}`;
       router.push(url, url);
     }
 
-    if (
-      beds === null &&
-      baths === null &&
-      minPrice === 0 &&
-      maxPrice !== 0
-    ) {
+    if (beds === null && baths === null && minPrice === 0 && maxPrice !== 0) {
       url = `/search?${queryMaxPrice}`;
       router.push(url, url);
     }
 
-    if (
-      beds === null &&
-      baths === null &&
-      minPrice !== 0 &&
-      maxPrice !== 0
-    ) {
+    if (beds === null && baths === null && minPrice !== 0 && maxPrice !== 0) {
       url = `/search?${queryMinPrice}&${queryMaxPrice}`;
       router.push(url, url);
     }
 
-    if (
-      beds !== null &&
-      baths !== null &&
-      minPrice === 0 &&
-      maxPrice === 0
-    ) {
+    if (beds !== null && baths !== null && minPrice === 0 && maxPrice === 0) {
       url = `/search?${queryBeds}&${queryBaths}`;
       router.push(url, url);
     }
 
-    if (
-      beds !== null &&
-      baths === null &&
-      minPrice !== 0 &&
-      maxPrice === 0
-    ) {
+    if (beds !== null && baths === null && minPrice !== 0 && maxPrice === 0) {
       url = `/search?${queryBeds}&${queryMinPrice}`;
       router.push(url, url);
     }
 
-    if (
-      beds !== null &&
-      baths === null &&
-      minPrice === 0 &&
-      maxPrice !== 0
-    ) {
+    if (beds !== null && baths === null && minPrice === 0 && maxPrice !== 0) {
       url = `/search?${queryBeds}&${queryMaxPrice}`;
       router.push(url, url);
     }
 
-    if (
-      beds === null &&
-      baths !== null &&
-      minPrice !== 0 &&
-      maxPrice === 0
-    ) {
+    if (beds === null && baths !== null && minPrice !== 0 && maxPrice === 0) {
       url = `/search?${queryBaths}&${queryMinPrice}`;
       router.push(url, url);
     }
 
-    if (
-      beds === null &&
-      baths !== null &&
-      minPrice === 0 &&
-      maxPrice !== 0
-    ) {
+    if (beds === null && baths !== null && minPrice === 0 && maxPrice !== 0) {
       url = `/search?${queryBaths}&${queryMaxPrice}`;
       router.push(url, url);
     }
 
-    if (
-      beds !== null &&
-      baths !== null &&
-      minPrice !== 0 &&
-      maxPrice === 0
-    ) {
+    if (beds !== null && baths !== null && minPrice !== 0 && maxPrice === 0) {
       url = `/search?${queryBeds}&${queryBaths}&${queryMinPrice}`;
       router.push(url, url);
     }
 
-    if (
-      beds !== null &&
-      baths !== null &&
-      minPrice === 0 &&
-      maxPrice !== 0
-    ) {
+    if (beds !== null && baths !== null && minPrice === 0 && maxPrice !== 0) {
       url = `/search?${queryBeds}&${queryBaths}&${queryMaxPrice}`;
       router.push(url, url);
     }
 
-    if (
-      beds !== null &&
-      baths === null &&
-      minPrice !== 0 &&
-      maxPrice !== 0
-    ) {
+    if (beds !== null && baths === null && minPrice !== 0 && maxPrice !== 0) {
       url = `/search?${queryBeds}&${queryMinPrice}&${queryMaxPrice}`;
       router.push(url, url);
     }
 
-    if (
-      beds === null &&
-      baths !== null &&
-      minPrice !== 0 &&
-      maxPrice !== 0
-    ) {
+    if (beds === null && baths !== null && minPrice !== 0 && maxPrice !== 0) {
       url = `/search?${queryBaths}&${queryMinPrice}&${queryMaxPrice}`;
       router.push(url, url);
     }
 
-    if (
-      beds !== null &&
-      baths !== null &&
-      minPrice !== 0 &&
-      maxPrice !== 0
-    ) {
+    if (beds !== null && baths !== null && minPrice !== 0 && maxPrice !== 0) {
       url = `/search?${queryBeds}&${queryBaths}&${queryMinPrice}&${queryMaxPrice}`;
       router.push(url, url);
     }
@@ -183,6 +108,15 @@ export default function Filter() {
     } else {
       setMinPrice(e.target.value);
     }
+
+    if (
+      beds === null &&
+      baths === null &&
+      e.target.value === 0 &&
+      maxPrice === 0
+    ) {
+      router.push("/search");
+    }
   };
 
   const handleMaxChange = (e) => {
@@ -192,6 +126,15 @@ export default function Filter() {
       setMaxPrice(e.target.value);
     } else {
       setMaxPrice(e.target.value);
+    }
+
+    if (
+      beds === null &&
+      baths === null &&
+      minPrice === 0 &&
+      e.target.value === 0
+    ) {
+      router.push("/search");
     }
   };
 
