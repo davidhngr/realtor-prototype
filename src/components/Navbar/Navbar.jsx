@@ -1,22 +1,16 @@
 import * as React from "react";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  Typography,
-  Button,
-  Input,
-  InputAdornment,
-} from "@mui/material";
+import { AppBar, Toolbar, Button, Input, InputAdornment } from "@mui/material";
 import { Search } from "@mui/icons-material";
 
+import { AuthContext } from "../../stores/AuthContext";
 import AuthModal from "../AuthModal/AuthModal";
 import OutlinedButton from "../OutlinedButton/OutlinedButton";
 
 const Navbar = ({ children }) => {
   const [modal, setModal] = React.useState(false);
+  const context = React.useContext(AuthContext);
 
   return (
     <div>
@@ -24,15 +18,11 @@ const Navbar = ({ children }) => {
         <AppBar className={styles.nav}>
           <Toolbar>
             <Link href="./../">
-              <Typography
-                variant="h6"
-                component="div"
-                sx={{ color: "black", cursor: "pointer" }}
-              >
+              <h3 style={{ color: "black", cursor: "pointer" }}>
                 Realtor Prototype
-              </Typography>
+              </h3>
             </Link>
-            <Box className={styles.inputContainer}>
+            <div className={styles.inputContainer}>
               <Input
                 className={styles.input}
                 disableUnderline
@@ -48,11 +38,18 @@ const Navbar = ({ children }) => {
                   </InputAdornment>
                 }
               />
-            </Box>
-            <OutlinedButton onClick={() => setModal(true)}>
-              <Typography sx={{ fontWeight: "500" }}>Login</Typography>
+            </div>
+            <OutlinedButton
+              onClick={() => {
+                context.auth ? context.signOut() : setModal(true);
+              }}
+            >
+              <p>{context.auth ? "Logout" : "Login"}</p>
             </OutlinedButton>
             <AuthModal props={modal} onBackdropClick={() => setModal(false)} />
+            <p style={{ color: "black", paddingLeft: 20 }}>
+              {context.auth ? context.currentUser : "No User"}
+            </p>
           </Toolbar>
         </AppBar>
       </div>
