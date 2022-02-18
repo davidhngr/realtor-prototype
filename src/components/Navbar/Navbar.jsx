@@ -10,7 +10,14 @@ import OutlinedButton from "../OutlinedButton/OutlinedButton";
 
 const Navbar = ({ children }) => {
   const [modal, setModal] = React.useState(false);
-  const context = React.useContext(AuthContext);
+  const { auth, authState, setAuthState, signOut, setResetTime } =
+    React.useContext(AuthContext);
+
+  React.useEffect(() => {
+    if (authState === "loggedin") {
+      setModal(false);
+    }
+  }, [authState]);
 
   return (
     <div>
@@ -41,15 +48,19 @@ const Navbar = ({ children }) => {
             </div>
             <OutlinedButton
               onClick={() => {
-                context.auth ? context.signOut() : setModal(true);
+                auth ? signOut() : setModal(true);
               }}
             >
-              <p>{context.auth ? "Logout" : "Login"}</p>
+              <p>{auth ? "Logout" : "Login"}</p>
             </OutlinedButton>
-            <AuthModal props={modal} onBackdropClick={() => setModal(false)} />
-            <p style={{ color: "black", paddingLeft: 20 }}>
-              {context.auth ? context.currentUser : "No User"}
-            </p>
+            <AuthModal
+              props={modal}
+              onBackdropClick={() => {
+                setModal(false);
+                setAuthState("login");
+                setResetTime(0);
+              }}
+            />
           </Toolbar>
         </AppBar>
       </div>

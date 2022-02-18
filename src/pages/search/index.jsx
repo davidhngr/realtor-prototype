@@ -109,7 +109,7 @@ export default function Search({ houses }) {
       <Split className={styles.container} sizes={["180vh", Infinity]}>
         <div className={styles.houseContainer}>
           <Box>
-            <p style={{ paddingLeft: 10 }}>Chicago Homes For Sale</p>
+            <h4 style={{ paddingLeft: 10 }}>Homes For Sale</h4>
             <Box className={styles.sortContainer}>
               <p>{houses.length} homes available</p>
               <p>Sort: Recommended</p>

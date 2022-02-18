@@ -36,6 +36,13 @@ const StyledOutline = styled('button')`
     background-color: rgb(255, 153, 51);
     border: 1px solid rgb(255, 153, 51);
   }
+
+  &:disabled {
+    color: white;
+    background-color: grey;
+    border: 1px solid grey;
+    cursor: not-allowed;
+  }
 `
 
 export default function OutlinedButton({ children, props, ...rest }) {

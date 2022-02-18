@@ -6,6 +6,9 @@ export const AuthContext = React.createContext();
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState(null);
+  const [authState, setAuthState] = React.useState("login");
+  const [username, setUsername] = React.useState("");
+  const [resetTime, setResetTime] = React.useState(0);
 
   React.useEffect(() => {
     checkUser();
@@ -28,28 +31,35 @@ export const AuthProvider = ({ children }) => {
       value={{
         auth,
         currentUser,
+        authState,
+        setAuthState,
+        username,
+        resetTime,
+        setResetTime,
         signIn: async (email, password, actions) => {
           try {
             await Auth.signIn(email, password).then((user) => {
               Auth.currentAuthenticatedUser().then((user) => {
                 setCurrentUser(user.attributes.email);
                 setAuth(true);
+                setAuthState("loggedin");
               });
               if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
-                //Navigate to new setup new password page
+                setUsername(email);
+                setAuthState("signUp");
               }
             });
           } catch (error) {
             setCurrentUser(null);
-            console.log(error);
+            if (error.code === "UserNotConfirmedException") {
+              setUsername(email);
+              setAuthState("confirmSignUp");
+            }
             if (error.code === "UserNotFoundException") {
               actions.setFieldError(
                 "usernotfound",
                 "This account does not exist"
               );
-            }
-            if (error.code === "UserNotConfirmedException") {
-              //Navigate to confirm signup page
             }
             if (error.code === "NotAuthorizedException") {
               actions.setFieldError(
@@ -62,8 +72,9 @@ export const AuthProvider = ({ children }) => {
         signUp: async (email, password, actions) => {
           try {
             await Auth.signUp(email, password).then((success) => {
+              setAuthState("confirmSignUp");
+              setUsername(email);
               actions.resetForm();
-              //Navigate to confirm signup page w/ query email && password
             });
           } catch (error) {
             if (error.code === "UsernameExistsException") {
@@ -74,20 +85,27 @@ export const AuthProvider = ({ children }) => {
             }
           }
         },
-        confirmSignUp: async (username, code) => {
+        confirmSignUp: async (username, code, actions) => {
           try {
-            await Auth.confirmSignUp(username, code).then((success) => {
-              //Navigate to previous page
-            });
+            await Auth.confirmSignUp(username, code).then((success) =>
+              setAuthState("login")
+            );
           } catch (error) {
-            console.log(error);
+            if (error.code === "ExpiredCodeException") {
+              actions.setFieldError(
+                "codeexpired",
+                "Code has expired, please request new code"
+              );
+            }
           }
         },
-        resendSignUp: async (email) => {
+        resendSignUp: async (email, actions) => {
           try {
-            await Auth.resendSignUp(email);
+            await Auth.resendSignUp(email).then((success) => setResetTime(59));
           } catch (error) {
-            console.log(error);
+            if (error.code === "LimitExceededException") {
+              setResetTime(null);
+            }
           }
         },
         signOut: async () => {
@@ -95,18 +113,13 @@ export const AuthProvider = ({ children }) => {
             await Auth.signOut();
             setAuth(null);
             setCurrentUser(null);
-          } catch (error) {
-            console.log(error);
-          }
+            setAuthState("login");
+          } catch (error) {}
         },
         forgotPassword: async (email, actions) => {
           try {
-            await Auth.forgotPassword(email).then((success) => {
-              console.log("Password Reset Successful");
-              //Navigate to forgot password page w/ query email
-            });
+            await Auth.forgotPassword(email);
           } catch (error) {
-            console.log(error.code);
             if (error.code === "UserNotFoundException") {
               actions.setFieldError(
                 "usernotfound",
@@ -115,7 +128,7 @@ export const AuthProvider = ({ children }) => {
             }
             if (error.code === "LimitExceededException") {
               actions.setFieldError(
-                "resetlimit",
+                "limitexceeded",
                 `You've exceeded the limited number of resets, please try again later or contact support`
               );
             }
@@ -126,7 +139,7 @@ export const AuthProvider = ({ children }) => {
             await Auth.forgotPasswordSubmit(email, code, password).then(
               (success) => {
                 console.log("Password reset successful");
-                //Navigate to password has been reset screen
+                //Navigate to login page
               }
             );
           } catch (error) {

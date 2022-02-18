@@ -14,11 +14,31 @@
 .input {
     width: 100%;
     margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.errorText {
+    font-size: 12px;
+    margin-left: 5px;
+    color: red;
+}
+
+.footerText {
+    color: rgb(255, 153, 51);
+    cursor: pointer;
+}
+
+.footerText:hover {
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .button {
     width: 100%;
-    margin-top: 40px;
     color: white;
+    margin-top: 10px;
+    margin-bottom: 15px;
     background-color: rgb(255, 151, 53);
+    border: 1px solid rgb(255, 151, 53);
 }
