@@ -58,7 +58,7 @@ export default function VerificationCode({ ...rest }) {
       clearInterval(countdown);
     }
     return () => clearTimeout(countdown);
-  }, [resetTime]);
+  }, []);
 
   return (
     <StyledButton disabled={resetTime <= 0 ? false : true} {...rest}>

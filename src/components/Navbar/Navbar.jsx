@@ -24,7 +24,7 @@ const Navbar = ({ children }) => {
       <div style={{ marginBottom: 40 }}>
         <AppBar className={styles.nav}>
           <Toolbar>
-            <Link href="./../">
+            <Link href="./../" passHref>
               <h3 style={{ color: "black", cursor: "pointer" }}>
                 Realtor Prototype
               </h3>

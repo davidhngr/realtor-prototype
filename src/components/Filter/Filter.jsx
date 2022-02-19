@@ -98,7 +98,7 @@ export default function Filter() {
       url = `/search?${queryBeds}&${queryBaths}&${queryMinPrice}&${queryMaxPrice}`;
       router.push(url, url);
     }
-  }, [beds, baths, minPrice, maxPrice]);
+  }, [beds, baths, minPrice, maxPrice, url]);
 
   const handleMinChange = (e) => {
     if (e.target.value > maxPrice && maxPrice != 0) {

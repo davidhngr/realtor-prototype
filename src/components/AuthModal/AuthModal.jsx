@@ -50,7 +50,7 @@ function LoginForm(props) {
 
   return (
     <div>
-      <h3 style={{ marginTop: 0, marginBottom: 20 }}>Log In</h3>
+      <h3 style={{ marginTop: 0, marginBottom: 20 }}>{"Log In"}</h3>
       <Formik
         initialValues={{ email: "", password: "" }}
         validateOnMount={true}
@@ -97,21 +97,21 @@ function LoginForm(props) {
               className={styles.footerText}
               onClick={() => setAuthState("forgotPassword")}
             >
-              Forgot Password?
+              {"Forgot Password?"}
             </p>
             <OutlinedButton
               className={styles.button}
               onClick={handleSubmit}
               type="submit"
             >
-              <p>Submit</p>
+              <p>{"Submit"}</p>
             </OutlinedButton>
-            <a style={{ marginLeft: 5 }}>Don't have an account? </a>
+            <a style={{ marginLeft: 5 }}>{"Don't have an account? "}</a>
             <a
               className={styles.footerText}
               onClick={() => setAuthState("signUp")}
             >
-              Sign Up
+              {"Sign Up"}
             </a>
           </div>
         )}
@@ -175,14 +175,14 @@ function SignUpForm(props) {
               onClick={handleSubmit}
               type="submit"
             >
-              <p>Submit</p>
+              <p>{"Submit"}</p>
             </OutlinedButton>
-            <a style={{ marginLeft: 5 }}>Already have an account? </a>
+            <a style={{ marginLeft: 5 }}>{"Already have an account? "}</a>
             <a
               className={styles.footerText}
               onClick={() => setAuthState("login")}
             >
-              Log In
+              {"Log In"}
             </a>
           </div>
         )}
@@ -197,7 +197,7 @@ function ConfirmSignUpForm(props) {
 
   return (
     <div>
-      <h3 style={{ marginTop: 0, marginBottom: 20 }}>Confirm Sign Up</h3>
+      <h3 style={{ marginTop: 0, marginBottom: 20 }}>{"Confirm Sign Up"}</h3>
       <Formik
         initialValues={{ username: username, code: "" }}
         validateOnMount={true}
@@ -219,10 +219,13 @@ function ConfirmSignUpForm(props) {
             {touched.code && errors.code && (
               <p className={styles.errorText}>{errors.code}</p>
             )}
-            <p className={styles.errorText}>{errors.codeexpired}{errors.verificationlimit}</p>
+            <p className={styles.errorText}>
+              {errors.codeexpired}
+              {errors.verificationlimit}
+            </p>
             {resetTime === null && (
               <p className={styles.errorText}>
-                You've exceeded the resend limit, please try again later
+                {"You've exceeded the resend limit, please try again later"}
               </p>
             )}
             <OutlinedButton
@@ -230,7 +233,7 @@ function ConfirmSignUpForm(props) {
               onClick={handleSubmit}
               type="submit"
             >
-              <p>Verify Code</p>
+              <p>{"Verify Code"}</p>
             </OutlinedButton>
             <VerificationCode onClick={() => resendSignUp(username)} />
           </div>
@@ -245,7 +248,7 @@ function ForgotPasswordForm(props) {
 
   return (
     <div>
-      <h3 style={{ marginTop: 0, marginBottom: 20 }}>Reset Password</h3>
+      <h3 style={{ marginTop: 0, marginBottom: 20 }}>{"Reset Password"}</h3>
       <Formik
         initialValues={{ email: "", password: "", confirmPassword: "" }}
         validateOnMount={true}
@@ -276,14 +279,14 @@ function ForgotPasswordForm(props) {
               onClick={handleSubmit}
               type="submit"
             >
-              <p>Submit</p>
+              <p>{"Submit"}</p>
             </OutlinedButton>
-            <a style={{ marginLeft: 5 }}>Remember your password? </a>
+            <a style={{ marginLeft: 5 }}>{"Remember your password? "}</a>
             <a
               className={styles.footerText}
               onClick={() => setAuthState("login")}
             >
-              Log In
+              {"Log In"}
             </a>
           </div>
         )}

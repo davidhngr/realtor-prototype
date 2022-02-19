@@ -74,7 +74,11 @@ export default function Search({ houses }) {
       let details = `${item.address}, ${item.city}, ${item.state}`;
 
       return (
-        <Link href={{ pathname: `p/${item.id}`, query: item }}>
+        <Link
+          href={{ pathname: `p/${item.id}`, query: item }}
+          passHref
+          key={item.id}
+        >
           <Grid
             className={styles.grid}
             item
